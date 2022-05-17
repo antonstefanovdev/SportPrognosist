@@ -1,0 +1,48 @@
+﻿@model AnalysisViewModel
+
+@{
+    ViewData["Title"] = "Точные прогнозы спортивных событий";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Мы поможем предсказать исход матча</h1>
+</div>
+
+<br/>
+
+<div class="d-flex">
+    <form method="post">
+        <table>
+                <tr>
+                    <td width="60%">Введите последовательность уже забитых голов в формате "х|г":</td>
+                    <td width="40%"><input type="text" name="Goals" value="@Model.DefaultInputValues["Goals"]" /> </td>
+                </tr>
+                <tr>
+                    <td>Введите время, прошедшее с начала матча:</td>
+                    <td><input type="number" name="CurrentTime" value="@Model.DefaultInputValues["CurrentTime"]" /> </td>
+                </tr>
+                <tr>
+                    <td>Введите минимальное количество голов для отслеживания:</td>
+                    <td><input type="number" name="minOfGoals" value="@Model.DefaultInputValues["minOfGoals"]" /> </td>
+                </tr>
+                <tr>
+                    <td>Введите максимальное количество голов для отслеживания:</td>
+                    <td><input type="number" name="maxOfGoals" value="@Model.DefaultInputValues["maxOfGoals"]" /> </td>
+                </tr>
+        </table>
+        <br/>
+        <center> <input type="submit" value="Отправить" /> </center>
+    </form>
+</div> 
+
+<br />
+
+
+
+    @if(Model != null)
+    {
+        if (Model.AnalysisData.Any())
+        {
+        <partial name="_AnalysisPartial" model="@Model.AnalysisData"/>
+        }
+    }

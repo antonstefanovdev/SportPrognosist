@@ -1,0 +1,38 @@
+﻿@using PoissonFootball.Models.Static
+@model Dictionary<string, double>
+
+<table width = "100%">
+        <tr>
+            <td style="width:40%">
+                    <b>Вероятность события</b>
+            </td>
+            <td style="width:60%">
+                    <b>Тип события</b> 
+            </td>
+       </tr>
+@foreach(var item in Model)
+    {
+        <tr>
+            <td style="width:40%">
+                @{
+                    var value = item.Value * 100;
+                    value = (int)(value * 100)/100.0;
+                }
+                @value %
+            </td>
+            @{
+                var itemColor = "gray";
+
+                if (item.Key == PredictionResults.ownersVictory)
+                    itemColor = "green";
+                else if (item.Key == PredictionResults.draw)
+                    itemColor = "orange";
+                else if (item.Key == PredictionResults.guestsVictory)
+                    itemColor = "red";
+            }
+            <td style="width:60%; color: @itemColor">
+                    @item.Key
+            </td>
+       </tr>
+    }
+</table>
